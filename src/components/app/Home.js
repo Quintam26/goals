@@ -1,79 +1,12 @@
-import React, { PureComponent } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-
-class Home extends PureComponent {
-  state = { 
-    name: 'felix',
-    color: 'black'
-  };
-
-  handleChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({ [name]: value });
-  }
-
-  render() { 
-    const { name, color } = this.state;
-
-    return (
-      <section>
-        <p>
-          name: <input name="name" value={name} onChange={this.handleChange}/>
-        </p>
-        <p>
-          color: <input name="color" value={color} onChange={this.handleChange}/>
-        </p>
-        
-        <ChildComponent name={name}/>
-
-        <WithRouterDisplay>
-          <span>{name}</span>
-        </WithRouterDisplay>
-      </section>
-    );
-  }
-}
-
-class Display extends PureComponent {
-  static propTypes = {
-    children: PropTypes.any,
-    location: PropTypes.object
-  };
-
+import React, { Component } from 'react';
+class Home extends Component {
+  
   render() {
-    const { children, location } = this.props;
-    console.log(children);
     return (
       <div>
-        <h3>Display Component</h3>
-        {children}
-        <div>{location.pathname}</div>
+        <h2>Welcome to Your Unrealistic Goals</h2>
       </div>
     );
   }
 }
-
-const WithRouterDisplay = withRouter(Display);
-
-class ChildComponent extends PureComponent {
-  static propTypes = {
-    name: PropTypes.string
-  };
-
-  // shouldComponentUpdate(props) {
-  //   return props.name !== this.props.name;
-  // }
-
-  render() {
-    const { name } = this.props;
-    console.log('ChildComponent render()');
-    return (
-      <p>
-        Name: {name}
-      </p>
-    );
-  }
-}
- 
 export default Home;

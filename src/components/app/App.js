@@ -8,9 +8,9 @@ import { getCheckedAuth } from '../auth/reducers';
 import Home from './Home';
 import Header from './Header';
 import Auth from '../auth/Auth';
-import GoalList from '../goals/GoalList';
+import Dashboard from '../goals/Dashboard';
 import GoalDetail from '../goals/GoalDetail';
-import AddGoal from '../goals/AddGoal';
+import GoalForm from '../goals/GoalForm';
 
 class App extends PureComponent {
 
@@ -33,10 +33,10 @@ class App extends PureComponent {
           <main>
             {checkedAuth &&
             <Switch>
-              <Route exact path="/" component={Home}/>              
+              <Route exact path="/" component={Home}/>     
               <Route path="/auth" component={Auth}/>
-              <PrivateRoute exact path="/goals" component={GoalList}/>
-              <PrivateRoute path="/goals/new" component={AddGoal}/>
+              <PrivateRoute exact path="/goals" component={Dashboard}/>
+              <PrivateRoute path="/goals/new" component={GoalForm}/>
               <PrivateRoute path="/goals/:id" component={GoalDetail}/>
               <Redirect to="/"/>
             </Switch>

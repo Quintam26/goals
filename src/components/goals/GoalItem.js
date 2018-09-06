@@ -7,17 +7,24 @@ import { Link } from 'react-router-dom';
 class GoalItem extends PureComponent {
 
   static propTypes = {
-    goal: PropTypes.object
+    goal: PropTypes.object.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired
   };
 
   render() {
-    const { goal } = this.props;
+    const { goal, onEdit, remove } = this.props;
 
     return (
-      <li>
+      <div>
         <Link to={`/goals/${goal._id}`}>{goal.name}</Link>
-      </li>
-    ); 
+        <section>
+          <strong>{goal.name} Goal</strong>
+          <button name="Edit" onClick={onEdit}>✎</button> 
+          <button name="Delete" onClick={() => remove(goal._id)}>🗑</button>
+        </section>
+      </div>
+    );
   }
 }
 
