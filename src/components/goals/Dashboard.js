@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Goals from './Goals';
 import { Link } from 'react-router-dom';
-import { getGoalList } from './reducers';
+import { getGoals } from './reducers';
 import { loadGoals, addGoals } from './actions';
 import GoalForm from './GoalForm';
 
@@ -42,6 +42,6 @@ class Dashboard extends PureComponent {
 }
 
 export default connect(
-  state => ({ goals: getGoalList(state) }),
+  state => ({ goals: getGoals(state) }),
   { loadGoals, addGoals }
 )(Dashboard);

@@ -1,21 +1,18 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getGoalById } from './reducers';
-import { loadGoal } from './actions';
 
 class GoalDetail extends PureComponent {
 
   static propTypes = {
-    loadGoal: PropTypes.func.isRequired,
+    loadGoals: PropTypes.func.isRequired,
     match: PropTypes.object,
     goal: PropTypes.object
   };
 
   componentDidMount() {
-    const { loadGoal, match } = this.props;
-    loadGoal(match.params.id);
+    const { loadGoals, match } = this.props;
+    loadGoals(match.params.id);
   }
 
   render() {
@@ -53,9 +50,4 @@ const ListView = ({ options }) => (
 );
 ListView.propTypes = { options: PropTypes.array };
 
-export default connect(
-  (state, { match }) => ({
-    goal: getGoalById(state, match.params.id)
-  }),
-  { loadGoal }
-)(GoalDetail);
+export default GoalDetail;

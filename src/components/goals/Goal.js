@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Goalitem from './Goalitem';
 import GoalForm from './GoalForm';
-import { update } from './actions';
+// import { update } from './actions';
 
 export class Goal extends Component {
 
@@ -12,19 +12,19 @@ export class Goal extends Component {
   };
 
   static propTypes = {
-    goal: PropTypes.object.isRequired,
-    update: PropTypes.func.isRequired
+    goal: PropTypes.string.isRequired,
+    // update: PropTypes.func.isRequired
   };
 
   handleEdit = () => {
     this.setState({ editing: true });
   };
 
-  handleComplete = goal => {
-    const { update } = this.props;
-    update(goal);
-    this.handleEndEdit();
-  };
+  // handleComplete = goal => {
+  //   const { update } = this.props;
+  //   update(goal);
+  //   this.handleEndEdit();
+  // };
 
   handleEndEdit = () => {
     this.setState({ editing: false });
@@ -39,7 +39,7 @@ export class Goal extends Component {
         {editing
           ? <GoalForm
             goal={goal}
-            onComplete={this.handleComplete}
+            // onComplete={this.handleComplete}
             onCancel={this.handleEndEdit}
           />
           : <Goalitem
@@ -53,6 +53,5 @@ export class Goal extends Component {
 }
 
 export default connect(
-  null, 
-  { update }
+  null
 )(Goal);

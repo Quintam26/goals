@@ -8,6 +8,7 @@ class GoalForm extends Component {
     editing: false,
     id: null,
     name: '',
+    description: ''
   };
 
   static propTypes = {
@@ -26,8 +27,8 @@ class GoalForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { name, budget, id } = this.state;
-    const goal = { name, budget };
+    const { name, description, id } = this.state;
+    const goal = { name, description };
     if(id) goal.id = id;
 
     const { onComplete, goal: originalGoal } = this.props;
@@ -35,7 +36,7 @@ class GoalForm extends Component {
     onComplete(goal)
       .then(() => {
         if(!originalGoal) {
-          this.setState({ name: '' });
+          this.setState({ name: '', description: '' });
           document.activeElement.blur();
         }
       })
@@ -49,12 +50,13 @@ class GoalForm extends Component {
   };
 
   render() {
-    const { id, name } = this.state;
+    const { id, name, description } = this.state;
     const { onCancel } = this.props;
 
     return (
       <form className={styles.goalForm} onSubmit={this.handleSubmit}>
         <InputControl name="name" value={name} onChange={this.handleChange}/>
+        <InputControl name="description" value={description} onChange={this.handleChange}/>
         <p>
           <button className="add-update-button" type="submit">{ id ? 'Update' : 'Add' }</button>
           {id && <button className="cancel-button" type="button" onClick={onCancel}>Cancel</button>}
